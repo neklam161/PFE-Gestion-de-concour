@@ -80,8 +80,8 @@ DATABASES = {
         'NAME': 'xe',
         'USER': 'system',
         'PASSWORD': 'test',
-        'HOST': '',
-        'PORT': '',
+        'HOST': 'localhost',
+        'PORT': '1521',
     }
 }
 
