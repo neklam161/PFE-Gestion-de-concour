@@ -1,30 +1,89 @@
 {% extends "student/base.html" %}
 {% block body %}
 {% if success %}
-    <div class="alert alert-success" role="alert">
-        The new student added successfully.
-    </div>
+<div class="alert alert-success" role="alert">
+  Etudiant a ete Créer
+</div>
 {% else %}
 <div class="vh-100 gradient-custom">
-    <div class="container py-5 h-100">
-      <div class="row justify-content-center align-items-center h-100">
-        <div class="col-12 col-lg-9 col-xl-7">
-          <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-            <div class="card-body p-4 p-md-5">
-              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 ml-4">Creer Votre Compte</h3>
-              <form action="{% url 'register' %}", method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <div class="mt-4 pt-2">
-                  <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
-                </div>
-  
-              </form>
+   <div class="container py-5 h-100">
+      <div class="row justify-content-center align-items-center ">
+         <div class="col-12 col-lg-9 col-lg-7">
+            <div class="card shadow-2-strong card-registration " style="border-radius: 15px;">
+               <div class="card-body p-4 p-md-5 ">
+                  <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 ml-4 fw-bold text-center">Créer Votre Compte</h3>
+                  <hr class="dashed ">
+                  <form action="{% url 'register' %}" method="POST">
+                    <!-- {% csrf_token %}
+                    {{ form.as_p }} -->
+                     <div class="grid" >
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+                        <p class="fw-bold fs-5">Nom et Prénom:</p>
+                        <div class="row mb-4">
+                           <div class="col ">
+                              {{ form.cne.errors }}
+                              {{ form.cne }}
+                              <label for="{{ form.cne.id_for_label }}" class=" mr-4">CNE *</label>
+                           </div>
+                           <div class="col ">
+                              {{ form.prenom.errors }}
+                              {{ form.prenom }}
+                              <label for="{{ form.cne.id_for_label }}" class=" mr-4">Prénom *</label>
+                           </div>
+                           <div class="col">
+                              {{ form.nom.errors }}
+                              {{ form.nom }}
+                              <label for="{{ form.cne.id_for_label }}" class=" mr-4">Nom *</label>
+                           </div>
+                        </div>
+                        <div class="row mb-4">
+                          <p class="fw-bold fs-5">Address Electronique:</p>
+                          <div class="col">
+                            {{ form.email.errors }}
+                            {{ form.email }}
+                            
+                         </div>
+                         <label for="{{ form.email.id_for_label }}" class=" mr-4">ex:Exemple@mail.com*</label>
+                        </div>
+                        <div class="row mb-4">
+                          <p class="fw-bold fs-5">Créer Votre Mot de Pass:</p>
+                          <div class="col">
+                           <label for="{{ form.email.id_for_label }}" class=" mr-4">Mot de Pass *</label>
+                            {{ form.password.errors }}
+                            {{ form.password }}
+                         </div>                      
+                         <div class="col">
+                           <label for="{{ form.email.id_for_label }}" class=" mr-4">Confirmer *</label>
+                           {{ form.confirmpassword.errors }}
+                           {{ form.confirmpassword }}
+                        </div>
+                        </div>
+                        <div class="row mb-4">
+                           <p class="fw-bold fs-5">Date de Naissance</p>
+                           <div class="col">
+                            <label for="{{ form.DateNaissance.id_for_label }}" class=" mr-4">Date de Naissance *</label>
+                             {{ form.DateNaissance.errors }}
+                             {{ form.DateNaissance }}
+                          </div>                      
+                          <div class="col">
+                            <label for="{{ form.Numerotelephone.id_for_label }}" placeholder="testing">Numéro de Telephone *</label>
+                            {{ form.Numerotelephone.errors }}
+                            {{ form.Numerotelephone }}
+                          
+                         </div>
+                         </div>
+                     </div>
+               </div>
+               <div class="text-center p-4">
+               <input class="btn btn-primary btn-lg text-center" type="submit" value="Créer" />
+               </div>
+               </form>
             </div>
-          </div>
-        </div>
+         </div>
       </div>
-    </div>
+   </div>
 </div>
-{% endif %}
-    {% endblock %}
+</div> 
+  {% endif %}
+{% endblock %}
