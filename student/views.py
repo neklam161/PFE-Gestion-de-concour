@@ -6,3 +6,6 @@ def register(request):
 
 def homepage(request):
     return render(request,'/student/home.html')
+
+def login(request):
+    return render(request,'student/login.html')
