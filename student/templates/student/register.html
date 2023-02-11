@@ -14,9 +14,7 @@
                   <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 ml-4 fw-bold text-center">Créer Votre Compte</h3>
                   <hr class="dashed ">
                   <form action="{% url 'register' %}" method="POST">
-                    <!-- {% csrf_token %}
-                    {{ form.as_p }} -->
-                     <div class="grid" >
+                    <div class="grid" >
                         {% csrf_token %}
                         {{ form.non_field_errors }}
                         <p class="fw-bold fs-5">Nom et Prénom:</p>
@@ -44,7 +42,7 @@
                             {{ form.email }}
                             
                          </div>
-                         <label for="{{ form.email.id_for_label }}" class=" mr-4">ex:Exemple@mail.com*</label>
+                         <label for="{{ form.email.id_for_label }}" class=" mr-4"></label>
                         </div>
                         <div class="row mb-4">
                           <p class="fw-bold fs-5">Créer Votre Mot de Pass:</p>
@@ -74,6 +72,7 @@
                          </div>
                          </div>
                      </div>
+                    
                </div>
                <div class="text-center p-4">
                <input class="btn btn-primary btn-lg text-center" type="submit" value="Créer" />

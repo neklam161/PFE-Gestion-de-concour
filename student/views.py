@@ -1,7 +1,34 @@
 from django.shortcuts import render
-from .forms import EtudiantForm
+from .forms import EtudiantForm,LoginForm
 from .models import Etudiant
 # Create your views here.
+def login(request):
+
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+
+        if form.is_valid():
+            clean=form.cleaned_data
+            etudiant=Etudiant.objects.filter(email=clean["email"],password=clean["password"])
+
+            if etudiant.exists():
+                name="welcome "+ etudiant[0].prenom +" "+etudiant[0].nom+ " to our home page"
+                return render(request,"student/home.html",{"name":name})
+
+            else:
+                return render(request,"student/home.html",{"name":"T'es pas inscris!!!"})
+        
+    else:
+        print("Didn't Work")
+        form = LoginForm()
+
+    return render(request,"student/login.html",{"form":LoginForm(),"hey":""})
+
+
+
+
+
+
 def register(request):
     if request.method == 'POST':
         form = EtudiantForm(request.POST)
@@ -43,5 +70,3 @@ def register(request):
 def homepage(request):
     return render(request,'/student/home.html')
 
-def login(request):
-    return render(request,'student/login.html')
