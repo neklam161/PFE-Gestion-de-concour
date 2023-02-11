@@ -1,8 +1,15 @@
 {% extends "student/base.html" %}
 {% block body %}
-<form action="">
+
+<form action="{% url 'login' %}" method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Log In</button>
+    {{ form.errors }}
+    
+        {{ form.email.label_tag}} {{ form.email }}
+        
+        {{ form.password.label_tag }} {{ form.password }}
+    
+    <input class="btn btn-primary btn-lg text-center" type="submit" value="submit" >
 </form>
+
     {% endblock %}

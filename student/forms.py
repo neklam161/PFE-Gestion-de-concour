@@ -37,3 +37,11 @@ class EtudiantForm(forms.ModelForm):
               "DateNaissance":forms.DateInput(attrs={'placeholder': 'DD/MM/YYYY'}),  
              "Numerotelephone": forms.NumberInput(attrs={'class':"form-control"})
         }
+
+class LoginForm(forms.ModelForm):
+    class Meta:
+        model = Etudiant
+        fields = ["email","password"]
+    
+
+    
