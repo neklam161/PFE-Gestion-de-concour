@@ -1,5 +1,8 @@
 from django import forms
 from .models import Etudiant
+from django.contrib.auth import authenticate
+from django.contrib.auth.forms import AuthenticationForm
+
 
 class EtudiantForm(forms.ModelForm):
     password=forms.CharField(widget=forms.PasswordInput())
@@ -38,10 +41,18 @@ class EtudiantForm(forms.ModelForm):
              "Numerotelephone": forms.NumberInput(attrs={'class':"form-control"})
         }
 
-class LoginForm(forms.ModelForm):
+"""class LoginForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
+    email = forms.CharField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}))
     class Meta:
         model = Etudiant
         fields = ["email","password"]
+    """
+class LoginForm(forms.Form):
+    username=forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
+    
+    
     
 
     

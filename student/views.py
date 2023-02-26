@@ -1,8 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.contrib.auth import authenticate,login,logout
+from django.contrib import messages
+
 from .forms import EtudiantForm,LoginForm
 from .models import Etudiant
 # Create your views here.
-def login(request):
+
+"""def login_view(request):
 
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -23,9 +27,35 @@ def login(request):
         form = LoginForm()
 
     return render(request,"student/login.html",{"form":LoginForm(),"hey":""})
+"""
 
 
+def login_view(request):
 
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
+            
+
+            etudiant = authenticate(request, username=username, password=password)
+            
+            if etudiant is not None:
+                login(request, etudiant)
+                return render(request, 'student/home.html', {'name': 'hey'})
+            
+            else:
+                return render(request, 'student/login.html', {'form':LoginForm(),'error': 'Invalid email or password.'})
+            
+    else:
+        form = LoginForm()
+    return render(request, 'student/login.html', {'form': LoginForm(),'error':''})
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 
 
 
