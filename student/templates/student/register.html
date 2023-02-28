@@ -20,19 +20,22 @@
                         <p class="fw-bold fs-5">Nom et Prénom:</p>
                         <div class="row mb-4">
                            <div class="col ">
+                              <label for="{{ form.cne.id_for_label }}" class=" mr-4">CNE *</label>
                               {{ form.cne.errors }}
                               {{ form.cne }}
-                              <label for="{{ form.cne.id_for_label }}" class=" mr-4">CNE *</label>
+                            
                            </div>
                            <div class="col ">
+                              <label for="{{ form.prenom.id_for_label }}" class=" mr-4">Prénom *</label>
                               {{ form.prenom.errors }}
                               {{ form.prenom }}
-                              <label for="{{ form.cne.id_for_label }}" class=" mr-4">Prénom *</label>
+                           
                            </div>
                            <div class="col">
+                              <label for="{{ form.nom.id_for_label }}" class=" mr-4">Nom *</label>
                               {{ form.nom.errors }}
                               {{ form.nom }}
-                              <label for="{{ form.cne.id_for_label }}" class=" mr-4">Nom *</label>
+                          
                            </div>
                         </div>
                         <div class="row mb-4">

@@ -1,8 +1,7 @@
 from django import forms
 from .models import Etudiant
-from django.contrib.auth import authenticate
-from django.contrib.auth.forms import AuthenticationForm
-
+from django.core.exceptions import ValidationError
+from django.contrib.auth.hashers import make_password
 
 class EtudiantForm(forms.ModelForm):
     password=forms.CharField(widget=forms.PasswordInput())
@@ -20,7 +19,23 @@ class EtudiantForm(forms.ModelForm):
             raise forms.ValidationError(
             "password and confirm_password does not match"
             )
-        label = {
+ 
+
+    def check_email_exists(email):
+        try:
+            Etudiant.objects.get(email=email)
+            raise ValidationError('This email is already in use.')
+        except Etudiant.DoesNotExist:
+            pass
+    
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        instance.password = make_password(self.cleaned_data["password"])
+        if commit:
+            instance.save()
+        return instance
+
+    label = {
             "cne": "CNE", 
             "nom":"Nom" , 
             "prenom" :"Prenom",
@@ -30,7 +45,7 @@ class EtudiantForm(forms.ModelForm):
             "DateNaissance":"Date de Naissance",
             "Numerotelephone": "Numero de telephone"
         }
-        widget = {
+    widget = {
             "cne":forms.TextInput(attrs={'class':"form-control"}) ,
             "nom":forms.TextInput(attrs={'class':"form-control"}) ,
              "prenom":forms.TextInput(attrs={'class':"form-control"}) ,
@@ -41,13 +56,6 @@ class EtudiantForm(forms.ModelForm):
              "Numerotelephone": forms.NumberInput(attrs={'class':"form-control"})
         }
 
-"""class LoginForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
-    email = forms.CharField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}))
-    class Meta:
-        model = Etudiant
-        fields = ["email","password"]
-    """
 class LoginForm(forms.Form):
     username=forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))

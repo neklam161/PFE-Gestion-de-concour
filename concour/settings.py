@@ -52,6 +52,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CONTEXT_PROCESSORS =[
+    'django.contrib.messages.context_processors.messages',
+]
+
 ROOT_URLCONF = 'concour.urls'
 
 TEMPLATES = [

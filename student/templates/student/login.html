@@ -1,6 +1,13 @@
 {% extends "student/base.html" %}
 {% block body %}
-<div class="vh-50 gradient-custom">
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<div class="vh-50 gradient-custom" style="margin-top: 60px;">
     <div class="container py-5 h-50">
        <div class="row justify-content-center align-items-center ">
           <div class="col-12 col-lg-9 col-lg-7">
@@ -11,7 +18,7 @@
 
 
 
-<section class="vh-75">
+<section class="vh-75" >
 <div class="container-fluid h-custom">
     <div class="row d-flex justify-content-center align-items-center h-100">
     <div class="col-md-9 col-lg-6 col-xl-5">

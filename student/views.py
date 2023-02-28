@@ -1,33 +1,11 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
+from django.shortcuts import redirect, render
 from django.contrib import messages
-
 from .forms import EtudiantForm,LoginForm
 from .models import Etudiant
-# Create your views here.
+from django.contrib.auth.models import User
 
-"""def login_view(request):
-
-    if request.method == "POST":
-        form = LoginForm(request.POST)
-
-        if form.is_valid():
-            clean=form.cleaned_data
-            etudiant=Etudiant.objects.filter(email=clean["email"],password=clean["password"])
-
-            if etudiant.exists():
-                name="welcome "+ etudiant[0].prenom +" "+etudiant[0].nom+ " to our home page"
-                return render(request,"student/home.html",{"name":name})
-
-            else:
-                return render(request,"student/home.html",{"name":"T'es pas inscris!!!"})
-        
-    else:
-        print("Didn't Work")
-        form = LoginForm()
-
-    return render(request,"student/login.html",{"form":LoginForm(),"hey":""})
-"""
 
 
 def login_view(request):
@@ -44,7 +22,7 @@ def login_view(request):
             
             if etudiant is not None:
                 login(request, etudiant)
-                return render(request, 'student/home.html', {'name': 'hey'})
+                return render(request, 'student/index.html', {'name': 'hey'})
             
             else:
                 return render(request, 'student/login.html', {'form':LoginForm(),'error': 'Invalid email or password.'})
@@ -83,14 +61,18 @@ def register(request):
                DateNaissance = new_DateNaissance,
                Numerotelephone = new_Numerotelephone
                )
+            new_user= User(
+                username=new_nom,
+                password=new_password,
+                email=new_email,
+                is_staff=0,
+                is_superuser=1
+            )
             new_student.save()
-            print("Worked")
-            return render(request,'student/register.html',{
-                'form': EtudiantForm(),
-                'success':True
-            })
+            new_user.save()
+            messages.success(request, 'Votre compte a été créé avec succès. Veuillez vous connecter pour accéder à votre compte.')
+            return redirect('login')
     else:
-        print("Didint Work")
         form = EtudiantForm()
     return render(request, 'student/register.html',{
         'form': EtudiantForm()
@@ -98,5 +80,7 @@ def register(request):
 
 
 def homepage(request):
-    return render(request,'/student/home.html')
+    return render(request,'student/index.html')
 
+def concour(request):
+    return render(request,'student/concour.html')
