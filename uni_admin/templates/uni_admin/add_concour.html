@@ -1,0 +1,82 @@
+{% extends "uni_admin/base.html" %}
+{% block body %}
+<div class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+       <div class="row justify-content-center align-items-center ">
+          <div class="col-12 col-lg-9 col-lg-7">
+             <div class="card shadow-2-strong card-registration " style="border-radius: 15px;">
+                <div class="card-body p-4 p-md-5 ">
+                   <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 ml-4 fw-bold text-center">Créer Votre concour</h3>
+                   <hr class="dashed ">
+                   <form method="POST">
+                     <div class="grid" >
+                         {% csrf_token %}
+                         {{ form.non_field_errors }}
+                        
+                         <div class="row mb-4">
+                            
+                               <label for="{{ form.name.id_for_label }}" class=" mr-4">name *</label>
+                               {{ form.name.errors }}
+                               {{ form.name }}
+                             
+                            
+                            
+                               <label for="{{ form.university.id_for_label }}" class=" mr-4">nom d'université  *</label>
+                               {{ form.university.errors }}
+                               {{ form.university }}
+                            
+                            
+                            
+                               <label for="{{ form.description.id_for_label }}" class=" mr-4">Description *</label>
+                               {{ form.description.errors }}
+                               {{ form.description }}
+                           
+                            
+                         </div>
+                         <div class="row mb-4">
+                           
+                             {{ form.start_date.errors }}
+                             {{ form.start_date.label_tag }}
+                             {{ form.start_date }}
+                             
+                          
+                          <label for="{{ form.email.id_for_label }}" class=" mr-4"></label>
+                         </div>
+                         <div class="row mb-4">
+                           
+                           
+                            <label for="{{ form.end_date.id_for_label }}" class=" mr-4">End date *</label>
+                             {{ form.end_date.errors }}
+                             {{ form.end_date }}
+                                              
+                          
+                            <label for="{{ form.doc_necessaire.id_for_label }}" class=" mr-4">document necessaire *</label>
+                            {{ form.doc_necessaire.errors }}
+                            {{ form.doc_necessaire }}
+                         
+                         </div>
+                         <div class="row mb-4">
+                            
+                            
+                             <label for="{{ form.location.id_for_label }}" class=" mr-4">Location *</label>
+                              {{ form.location.errors }}
+                              {{ form.location }}
+                                                
+                           
+                          </div>
+                      </div>
+                     
+                </div>
+                <div class="text-center p-4">
+                <input class="btn btn-primary btn-lg text-center" type="submit" value="Créer" />
+                </div>
+                </form>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ </div> 
+
+
+{% endblock %}

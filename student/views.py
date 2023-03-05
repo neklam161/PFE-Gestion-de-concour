@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from .forms import EtudiantForm,LoginForm
-from .models import Etudiant
+from .models import *
 from django.contrib.auth.models import User
 
 
@@ -83,4 +83,6 @@ def homepage(request):
     return render(request,'student/index.html')
 
 def concour(request):
-    return render(request,'student/concour.html')
+    list_concour=concours.objects.all()
+
+    return render(request,'student/concour.html',{"list_concours" : list_concour})

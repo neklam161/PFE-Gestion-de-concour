@@ -19,3 +19,23 @@ class Etudiant(models.Model):
     class Meta:
         db_table = 'Student'
     
+
+class university(models.Model):
+    id = models.CharField(primary_key=True,max_length=30)
+    name = models.CharField(max_length=200) 
+    location = models.CharField(max_length=30)
+    def _str_(self):
+        return self.name
+
+
+class concours(models.Model):
+    name = models.CharField(max_length=200)
+    university = models.ForeignKey(university, on_delete=models.CASCADE,null=True )
+    description = models.CharField(max_length=300)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    doc_necessaire = models.CharField(max_length=300)
+
+
+    def _str_(self):
+        return self.name 
