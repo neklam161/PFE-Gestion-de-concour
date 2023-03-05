@@ -1,57 +1,57 @@
 {% extends "student/base.html" %}
-{% block body %}
-<div class="vh-50 gradient-custom" style="margin-top: 60px;">
-    <div class="container py-5 h-50">
-       <div class="row justify-content-center align-items-center ">
-          <div class="col-12 col-lg-9 col-lg-7">
-             <div class="card shadow-2-strong card-registration " style="border-radius: 15px;">
-                <div class="card-body p-4 p-md-5 ">
-                   <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 ml-4 fw-bold text-center">Liste des concours disponibles</h3>
-                   <hr class="dashed ">
-
-
-
-<section class="vh-75" >
-<div class="container-fluid h-custom">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-    <div class="col-md-9 col-lg-6 col-xl-5">
-        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-        class="img-fluid" alt="Sample image">
+{% block tes %}
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+      <span class="fs-4">Sidebar</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a href="#" class="nav-link active" aria-current="page">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
+          Home
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link text-white">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+          Dashboard
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link text-white">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+          Orders
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link text-white">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+          Products
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link text-white">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
+          Customers
+        </a>
+      </li>
+    </ul>
+    <hr>
+    <div class="dropdown">
+      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="https://github.com/mdo.png" alt="" class="rounded-circle me-2" width="32" height="32">
+        <strong>mdo</strong>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+        <li><a class="dropdown-item" href="#">New project...</a></li>
+        <li><a class="dropdown-item" href="#">Settings</a></li>
+        <li><a class="dropdown-item" href="#">Profile</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#">Sign out</a></li>
+      </ul>
     </div>
-
-    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form action="{% url 'login' %}" method="POST">
-            <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-
-            {% csrf_token %}
-             {{error}}
-            <div class="form-outline mb-5"></div>
-           
-                {{ form.username.label_tag}} {{ form.username }}
-
-                {{ form.username.errors }}   
-            </div>
-            <div class="form-outline mb-3">
-                {{ form.password.label_tag }} {{ form.password }}
-
-                {{ form.password.errors }} 
-            </div>
-
-            <div class="text-center text-lg-start mt-4 pt-2">
-                <input class="btn btn-primary btn-lg text-center " type="submit" value="Log In" />
-                <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
-            </div>
-        </div>
-        </form>
-</div>
-</div>
-</div>
-</section>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div> 
-
+  </div>
 {% endblock %}
+        

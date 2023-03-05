@@ -9,7 +9,7 @@ class Etudiant(models.Model):
     nom = models.CharField(max_length=12)
     prenom = models.CharField(max_length=12)
     email = models.EmailField(max_length=30,unique=True)
-    password=models.CharField(max_length=50,blank=True, null=True)
+    password=models.CharField(max_length=100,blank=True, null=True)
     confirmpassword=models.CharField(max_length=50,null=True)
     DateNaissance = models.DateField()
     Numerotelephone = models.IntegerField()
