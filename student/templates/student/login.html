@@ -1,64 +1,70 @@
 {% extends "student/base.html" %}
+
+
 {% block body %}
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-<div class="vh-50 gradient-custom" style="margin-top: 60px;">
-    <div class="container py-5 h-50">
-       <div class="row justify-content-center align-items-center ">
-          <div class="col-12 col-lg-9 col-lg-7">
-             <div class="card shadow-2-strong card-registration " style="border-radius: 15px;">
-                <div class="card-body p-4 p-md-5 ">
-                   <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 ml-4 fw-bold text-center">Login</h3>
-                   <hr class="dashed ">
+<body class="bg-primary">
+    <div class="vh-80 d-flex justify-content-center align-items-center mt-5">
+      <div class="container">
+        <div class="row d-flex justify-content-center">
+          <div class="col-12 col-md-8 col-lg-6">
+            <div class="card bg-white">
+              <div class="card-body p-5">
+                
+                <form class="mb-3 mt-md-4" method="post" action="{% url 'login' %}">
+          
+                  {% if messages %}
+                  <ul class="messages">
+                      {% for message in messages %}
+                      <div class="alert alert-success" role="alert">
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                      </div>
+                            {% endfor %}
+                          </ul>
+                          {% endif %}
+                          {% if form.errors %}
+                          <div class="alert alert-danger">
+                              {% for field, errors in form.errors.items %}
+                                  {{ field }}:
+                                  <ul>
+                                      {% for error in errors %}
+                                          <li>{{ error }}</li>
+                                      {% endfor %}
+                                  </ul>
+                              {% endfor %}
+                          </div>
+                      {% endif %}
+                  <h2 class="fw-bold mb-4">Connectez-vous à votre compte</h2>
+             
+                  <div class="mb-3">
+                    {% csrf_token %}
+                  <label for="id_username" class="form-label"> {{ form.username.label}}:</label> 
+                  
+                      {{ form.username }}
+                    {{ form.username.errors }}   
+                    
+                  </div>
+                  <div class="mb-3">
+                    {{ form.password.label_tag }} {{ form.password }}
 
+                    {{ form.password.errors }} 
+                    <!-- <label for="password" class="form-label ">Mot de Pass</label>
+                    <input type="password" class="form-control" id="password" placeholder="*******"> -->
+                  </div>
+                  <p class="small"><a class="text-primary" href="forget-password.html">Oublier votre Mot de pass?</a></p>
+                  <div class="d-grid">
+                    <button class="btn btn-outline-dark" type="submit">Se connecter</button>
+                  </div>
+                </form>
+                <div>
+                  <p class="mb-0  text-center">Vous n'avez pas de compte? <a href="{% url 'register' %}" class="text-primary fw-bold">Creer</a></p>
+                </div>
 
-
-<section class="vh-75" >
-<div class="container-fluid h-custom">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-    <div class="col-md-9 col-lg-6 col-xl-5">
-        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-        class="img-fluid" alt="Sample image">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form action="{% url 'login' %}" method="POST">
-            <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-
-            {% csrf_token %}
-             {{error}}
-            <div class="form-outline mb-5"></div>
-           
-                {{ form.username.label_tag}} {{ form.username }}
-
-                {{ form.username.errors }}   
-            </div>
-            <div class="form-outline mb-3">
-                {{ form.password.label_tag }} {{ form.password }}
-
-                {{ form.password.errors }} 
-            </div>
-
-            <div class="text-center text-lg-start mt-4 pt-2">
-                <input class="btn btn-primary btn-lg text-center " type="submit" value="Log In" />
-                <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
-            </div>
-        </div>
-        </form>
-</div>
-</div>
-</div>
-</section>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div> 
 
     {% endblock %}

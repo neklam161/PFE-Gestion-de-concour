@@ -1,5 +1,6 @@
 {% extends "student/base.html" %}
 {% block body %}
+<body class="bg-primary"></body>
 {% if success %}
 <div class="alert alert-success" role="alert">
   Etudiant a ete Créer
@@ -15,6 +16,19 @@
                   <hr class="dashed ">
                   <form action="{% url 'register' %}" method="POST">
                     <div class="grid" >
+                     {% if form.errors %}
+    <div class="alert alert-danger">
+        {% for field, errors in form.errors.items %}
+            {{ field }}:
+            <ul>
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </div>
+{% endif %}
+
                         {% csrf_token %}
                         {{ form.non_field_errors }}
                         <p class="fw-bold fs-5">Nom et Prénom:</p>
@@ -25,18 +39,29 @@
                               {{ form.cne }}
                             
                            </div>
-                           <div class="col ">
-                              <label for="{{ form.prenom.id_for_label }}" class=" mr-4">Prénom *</label>
-                              {{ form.prenom.errors }}
-                              {{ form.prenom }}
+                           </div>
+                           <div class="row mb-4">
+                              <div class="col ">
+                                 <label for="{{ form.prenom.id_for_label }}" class=" mr-4">Prénom *</label>
+                                 {{ form.prenom.errors }}
+                                 {{ form.prenom }}
+                              
+                              </div>
+                              <div class="col">
+                                 <label for="{{ form.nom.id_for_label }}" class=" mr-4">Nom *</label>
+                                 {{ form.nom.errors }}
+                                 {{ form.nom }}
+                             
+                              </div>
+                           </div>
+                           <div class="row mb-5">
+                              <div class="col">
+                                 <label for="{{ form.DateNaissance.id_for_label }}" class=" mr-4">Date de Naissance *</label>
+                                  {{ form.DateNaissance.errors }}
+                                  {{ form.DateNaissance }}
+                               </div>  
+                           </div>
                            
-                           </div>
-                           <div class="col">
-                              <label for="{{ form.nom.id_for_label }}" class=" mr-4">Nom *</label>
-                              {{ form.nom.errors }}
-                              {{ form.nom }}
-                          
-                           </div>
                         </div>
                         <div class="row mb-4">
                           <p class="fw-bold fs-5">Address Electronique:</p>
@@ -61,12 +86,8 @@
                         </div>
                         </div>
                         <div class="row mb-4">
-                           <p class="fw-bold fs-5">Date de Naissance</p>
-                           <div class="col">
-                            <label for="{{ form.DateNaissance.id_for_label }}" class=" mr-4">Date de Naissance *</label>
-                             {{ form.DateNaissance.errors }}
-                             {{ form.DateNaissance }}
-                          </div>                      
+                           <p class="fw-bold fs-5">Votre Numero</p>
+                                               
                           <div class="col">
                             <label for="{{ form.Numerotelephone.id_for_label }}" placeholder="testing">Numéro de Telephone *</label>
                             {{ form.Numerotelephone.errors }}
@@ -78,7 +99,7 @@
                     
                </div>
                <div class="text-center p-4">
-               <input class="btn btn-primary btn-lg text-center" type="submit" value="Créer" />
+               <input class="btn btn-primary btn-lg text-center" type="submit" value="Créer votre compte" />
                </div>
                </form>
             </div>
