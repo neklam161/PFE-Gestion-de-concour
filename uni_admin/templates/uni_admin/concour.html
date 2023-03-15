@@ -1,0 +1,63 @@
+{% extends "uni_admin/base.html" %}
+{% block body %}
+<div class="page-container bg-body-secondary">
+  <div class="content-wrap">
+      <div class="row">
+          <div class="col-2">   
+            <div class="sidebar">
+              {% include "uni_admin/sidebar.html" %}
+            </div>         
+          </div> 
+          <div class="col-10 bg-light">
+            <div class="row d-flex justify-content-start bg-primary p-3">
+              <div class="col-md-3">
+                <form class='form pr-4' action="{% url 'concour' %}" method="GET">
+                  <div class="input-group">
+                    <input type="text" class="form-control mr-2" placeholder="Search anything..." name="q">
+                    <div class="input-group-prepend">
+                      <button class="btn btn-primary " type="submit">Search</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          <div class="col-12 overflow-auto" style="max-height: 90vh;">
+            <!-- <div class="card-body p-4 p-md-5 " style="max-width: 90vw;margin: auto; margin-top: 60px;"> -->
+                  <hr class="dashed ">
+                  <table class="table table-dashed table-hover overflow-auto" style="max-height: 90vh;">
+                      <thead class="thead-light">
+                        <tr>
+                          <th scope="col"></th>
+                          <th scope="col">Name</th>
+                          <th scope="col">University</th>
+                          <th scope="col">Location</th>
+                          <th scope="col">Start date</th>
+                          <th scope="col">End date</th>
+                          <th scope="col">Inscription</th>
+                        </tr>
+                      </thead>
+                      <tbody class="tbody-light">
+                          {% for concour in list_concours %}
+                        <tr>
+                          <th scope="row">{{ forloop.counter }}</th>
+                          <td>{{concour.name}}</td>
+                          <td>{{concour.university.name}}</td>
+                          <td>{{concour.university.location}}</td>
+                          <td>{{concour.start_date}}</td>
+                          <td>{{concour.end_date}}</td>
+                          <td><form action="{% url 'delete_concour' concour.id %}" method="POST">
+                              {% csrf_token %}
+                              <input class="btn btn-primary btn-lg text-center" type="submit" value="Delete" />
+                            </form>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+          <!-- </div> -->
+          </div>
+  </div>
+</div>
+
+{% endblock %}

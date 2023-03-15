@@ -2,12 +2,14 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from .forms import EtudiantForm,LoginForm
+from .forms import EtudiantForm,LoginForm,SearchForm
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.views.decorators.csrf import csrf_protect
-
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.urls import reverse
 @csrf_protect
 def login_view(request):
 
@@ -23,12 +25,17 @@ def login_view(request):
             
             if etudiant is not None:
                 login(request, etudiant)
+                print("User '{}' logged in successfully.".format(etudiant.username))
                 return redirect("studentpage")
             
             else:
                 return render(request, 'student/login.html', {'form':LoginForm(),'error': 'Invalid email or password.'})
+        else:
+            print("Form is invalid.")
+
             
     else:
+        print("something is broken")
         form = LoginForm()
     return render(request, 'student/login.html', {'form': form})
 
@@ -51,7 +58,14 @@ def register(request):
             new_DateNaissance = form.cleaned_data["DateNaissance"]
             new_Numerotelephone = form.cleaned_data["Numerotelephone"]
             hashed_password = make_password(new_password)
+            new_user= User(
+                username=new_nom,
+                password=hashed_password,
+                email=new_email,
+            )
+            new_user.save()
             new_student = Etudiant(
+               user=new_user,
                cne = new_cne,
                nom = new_nom,
                prenom = new_prenom,
@@ -60,16 +74,8 @@ def register(request):
                confirmpassword = new_confpassword,
                DateNaissance = new_DateNaissance,
                Numerotelephone = new_Numerotelephone
-               )
-            new_user= User(
-                username=new_nom,
-                password=hashed_password,
-                email=new_email,
-                is_staff=0,
-                is_superuser=1
             )
             new_student.save()
-            new_user.save()
             messages.success(request,'Votre compte a été créé avec succès. Veuillez vous connecter pour accéder à votre compte.')
             return redirect('login')
     else:
@@ -81,15 +87,12 @@ def register(request):
 def homepage(request):
     return render(request,'student/index.html')
 
+@login_required
 def concour(request):
-    list_concour=concours.objects.all()
+    etudiant = request.user.etudiant
+    list_concours = concours.objects.all()
+    search_term = request.GET.get('q')
+    if search_term:
+        list_concours = list_concours.filter(name__icontains=search_term)
+    return render(request,'student/concour.html',{"list_concours" : list_concours,"etudiant":etudiant})
 
-    return render(request,'student/concour.html',{"list_concours" : list_concour})
-
-
-def student_homepage(request):
-    # get the currently logged in user's username
-    username = request.user.username
-
-    # render the index.html template with the username variable
-    return render(request, 'student/student_homepage.html', {'username': username})

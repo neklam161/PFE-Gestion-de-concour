@@ -3,9 +3,15 @@ from .models import Etudiant
 from django.core.exceptions import ValidationError
 from django.contrib.auth.hashers import make_password
 
+
+
+class DateInput(forms.DateInput):
+    input_type = 'date'  
+
 class EtudiantForm(forms.ModelForm):
     password=forms.CharField(widget=forms.PasswordInput())
     confirmpassword=forms.CharField(widget=forms.PasswordInput())
+    DateNaissance=forms.DateField(widget=DateInput)
     class Meta:
         model = Etudiant
         fields = ["cne" ,"nom" , "prenom" ,"email" ,"password","confirmpassword", "DateNaissance","Numerotelephone"]
@@ -52,7 +58,7 @@ class EtudiantForm(forms.ModelForm):
              "email":forms.EmailInput(attrs={'class':"form-control"}),
              "password":forms.PasswordInput(attrs={'class':"form-control"}),
              "confirmpassword":forms.PasswordInput(attrs={'class':"form-control"}),
-              "DateNaissance":forms.DateInput(attrs={'placeholder': 'DD/MM/YYYY'}),  
+              "DateNaissance":forms.DateInput(),  
              "Numerotelephone": forms.NumberInput(attrs={'class':"form-control"})
         }
 
@@ -61,6 +67,7 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
     
     
-    
+class SearchForm(forms.Form):
+    query = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control form-input', 'placeholder': 'Search anything...'}))    
 
     

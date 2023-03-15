@@ -1,6 +1,10 @@
 {% extends "student/base.html" %}
 {% load static %}
+{% block nav %}
 
+{% include "student/navbar.html" %}
+
+{% endblock %}
 
 {% block body %}
 
@@ -18,8 +22,8 @@
                
             
             </div>
-        <section class="page-section portfolio p-5">
-            <div class="container">
+        <section class="page-section portfolio bg-white p-5">
+            <div class="container text-center">
                 <h2 class="text-center text-uppercase text-secondary pb-5">List des Universite Partenairs</h2>
             
                         <!-- <img class="img-fluid concourimg" src="{% static 'img/ENSA.png' %}" alt="">
@@ -34,6 +38,11 @@
                         <img class='img-fluid concourimg' src="{% static 'img/uni2.png' %}" alt="">
                         <img class='img-fluid concourimg' src="{% static 'img/uni3.png' %}" alt="">
                         <img class='img-fluid concourimg' src="{% static 'img/uni4.png' %}" alt="">
+                        <img class='img-fluid concourimg' src="{% static 'img/uni5.png' %}" alt="">
+                        <img class='img-fluid concourimg' src="{% static 'img/images.png' %}" alt="">
+                        <img class='img-fluid concourimg' src="{% static 'img/ENSA.png' %}" alt="">
+                        <img class='img-fluid concourimg' src="{% static 'img/Ensias2.jpg' %}" alt="">
+
                 </div>
                 
                 </div>
@@ -50,7 +59,7 @@
             </div>
         </section>
       
-        <section class="page-section p-5">
+        <section class="page-section bg-white p-5">
             <div class="container">
          
                 <h2 class="page-section-heading text-center text-uppercase text-secondary pb-4">Contact</h2>

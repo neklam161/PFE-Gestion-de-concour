@@ -15,9 +15,12 @@ def delete_concour(request, concour_id):
 
 
 
-def concour(request):
-    list_concour=concours.objects.all()
-    return render(request,'uni_admin/concour.html',{"list_concours" : list_concour})
+def concour_admin(request):
+    list_concours = concours.objects.all()
+    search_term = request.GET.get('q')
+    if search_term:
+        list_concours = list_concours.filter(name__icontains=search_term)
+    return render(request,'uni_admin/concour.html',{"list_concours" : list_concours})
 
 
 

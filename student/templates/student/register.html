@@ -1,12 +1,21 @@
 {% extends "student/base.html" %}
+
+{% block nav %}
+
+{% include "student/navbar.html" %}
+
+
+{% endblock %}
+
 {% block body %}
-<body class="bg-primary"></body>
+<body style="  background: rgb(2,0,36);
+background: linear-gradient(21deg, rgba(2,0,36,1) 0%, rgba(26,188,144,1) 50%, rgba(0,212,255,1) 100%);">
 {% if success %}
 <div class="alert alert-success" role="alert">
   Etudiant a ete Créer
 </div>
 {% else %}
-<div class="vh-100 gradient-custom">
+<div class="vh-150">
    <div class="container py-5 h-100">
       <div class="row justify-content-center align-items-center ">
          <div class="col-12 col-lg-9 col-lg-7">
@@ -42,7 +51,7 @@
                            </div>
                            <div class="row mb-4">
                               <div class="col ">
-                                 <label for="{{ form.prenom.id_for_label }}" class=" mr-4">Prénom *</label>
+                                 <label for="{{ form.prenom.id_for_label }}" class=" mr-4 mb-4">Prénom *</label>
                                  {{ form.prenom.errors }}
                                  {{ form.prenom }}
                               
@@ -75,12 +84,12 @@
                         <div class="row mb-4">
                           <p class="fw-bold fs-5">Créer Votre Mot de Pass:</p>
                           <div class="col">
-                           <label for="{{ form.email.id_for_label }}" class=" mr-4">Mot de Pass *</label>
+                           <label for="{{ form.email.id_for_label }}" class=" mr-4 mb-4">Mot de Pass *</label>
                             {{ form.password.errors }}
                             {{ form.password }}
                          </div>                      
                          <div class="col">
-                           <label for="{{ form.email.id_for_label }}" class=" mr-4">Confirmer *</label>
+                           <label for="{{ form.email.id_for_label }}" class=" mr-4 ">Confirmer *</label>
                            {{ form.confirmpassword.errors }}
                            {{ form.confirmpassword }}
                         </div>

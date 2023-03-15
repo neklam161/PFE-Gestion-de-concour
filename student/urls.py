@@ -1,14 +1,13 @@
 from django.urls import path
-from student import views
-# from .forms import LoginForm
-from django.contrib.auth import views as auth_views
 
+from django.contrib.auth import views as auth_views
+from student.views import register,login_view,homepage,logout_view,concour
 urlpatterns = [
-    path('register/',views.register,name='register'),
-    path('login/',views.login_view,name="login"),
-    path('',views.homepage,name='home'),
-    path('logout/',views.logout_view,name="logout"),
-    path('concour/',views.concour,name="concour")
+    path('register/',register,name='register'),
+    path('login/',login_view,name="login"),
+    path('',homepage,name='home'),
+    path('logout/',logout_view,name="logout"),
+    path('concour/',concour,name="studentpage")
 ]
 
 
