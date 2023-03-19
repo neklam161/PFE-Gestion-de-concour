@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_beat',
     'student',
     'uni_admin',
 ]
@@ -89,7 +90,7 @@ DATABASES = {
         'HOST':'127.0.0.1',
         'PORT':'3306',
         'USER':'root',
-        'PASSWORD':'',
+        'PASSWORD':'root',
 
     }
 }
@@ -127,7 +128,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'GMT'
 
 USE_I18N = True
 
@@ -149,3 +150,20 @@ AUTHENTICATION_BACKENDS = [    'django.contrib.auth.backends.ModelBackend',]
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+from celery.schedules import crontab
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/'
+
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/'
+
+CELERY_TIMEZONE = 'GMT'
+
+CELERY_BEAT_SCHEDULE = {
+    'set_status': {
+        'task': 'student.tasks.set_status',
+        'schedule': crontab(hour=0, minute=0),
+        
+    },
+}

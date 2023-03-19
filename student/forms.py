@@ -70,4 +70,10 @@ class LoginForm(forms.Form):
 class SearchForm(forms.Form):
     query = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control form-input', 'placeholder': 'Search anything...'}))    
 
-    
+class inscri_concour(forms.Form):
+    cne = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'G*********'}))
+    nom = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nom'}))
+    prenom = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Prenom'}))
+    email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'example@gmail.com'}))
+    note = forms.IntegerField()
+

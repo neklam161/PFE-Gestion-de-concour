@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from .forms import EtudiantForm,LoginForm,SearchForm
+from .forms import *
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
@@ -95,4 +95,39 @@ def concour(request):
     if search_term:
         list_concours = list_concours.filter(name__icontains=search_term)
     return render(request,'student/concour.html',{"list_concours" : list_concours,"etudiant":etudiant})
+
+
+def inscrire(request,concour_id):
+
+
+    if request.method == 'POST':
+        form = inscri_concour(request.POST)
+        if form.is_valid():
+        
+            new_cne = form.cleaned_data["cne"]
+            new_nom = form.cleaned_data["nom"]
+            new_prenom = form.cleaned_data["prenom" ]
+            new_email = form.cleaned_data["email"]
+            new_note = form.cleaned_data["note" ]
+            
+            new_etudiant = Etudiant.objects.get(cne=new_cne)
+            new_concour = concours.objects.get(id = concour_id)
+
+            if new_etudiant:
+                new_inscription = attente(
+                    etudiant = new_etudiant,
+                    concour = new_concour,
+                    note = new_note
+                )
+            else : 
+                print("false cne")  
+            new_inscription.save()
+            
+            messages.success(request, 'Vous avez inscris avec succès.')
+            return redirect('concour')
+    else:
+        form = inscri_concour()
+    return render(request, 'student/inscription.html',{
+            'form': form
+        })
 
