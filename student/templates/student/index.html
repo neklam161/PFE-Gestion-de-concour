@@ -1,0 +1,132 @@
+{% extends "student/base.html" %}
+{% load static %}
+{% block nav %}
+
+{% include "student/navbar.html" %}
+
+{% endblock %}
+
+{% block body %}
+
+ <div class="container-fluid bg-primary text-white text-center p-5" style="border:black 1px solid;">
+                <div class="row text-center pt-5">
+                    <div class="col-md-6">
+                        <img src="{% static 'img/kindpng_1800237.png' %}" style="width: 400px;">
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="p-5">Une plateforme qui gérera efficacement toutes les tâches liées aux concours, notamment la publicité, l'inscription, la sélection des participants, la gestion des résultats et la communication avec les participants.
+                        </h3>
+                    </div>
+                
+                </div>
+               
+            
+            </div>
+        <section class="page-section portfolio bg-white p-5">
+            <div class="container text-center">
+                <h2 class="text-center text-uppercase text-secondary pb-5">List des Universite Partenairs</h2>
+            
+                        <!-- <img class="img-fluid concourimg" src="{% static 'img/ENSA.png' %}" alt="">
+                        <img class="img-fluid concourimg" src="{% static 'img/enscasablanca.coouleur-1200x900-cropped.png' %}" alt="">
+                        <img class="img-fluid concourimg" src="{% static 'img/index.png' %}" alt="">
+                        <img class="img-fluid concourimg ml-4" src="{% static 'img/Ensias2.jpg' %}" alt="">
+                        <img class="img-fluid concourimg" src="{% static 'img/enst-1.png' %}" alt="">
+                        <img class="img-fluid concourimg" src="{% static 'img/estessaouira.couleur-1200x900-cropped.png' %}" alt="">
+                        <img class="img-fluid concourimg" src="{% static 'img/estf.png' %}" alt="">
+                        <img class="img-fluid concourimg" src="{% static 'img/images.png' %}" alt=""> -->
+                        <img class='img-fluid concourimg' src="{% static 'img/uni1.png' %}" alt="">
+                        <img class='img-fluid concourimg' src="{% static 'img/uni2.png' %}" alt="">
+                        <img class='img-fluid concourimg' src="{% static 'img/uni3.png' %}" alt="">
+                        <img class='img-fluid concourimg' src="{% static 'img/uni4.png' %}" alt="">
+                        <img class='img-fluid concourimg' src="{% static 'img/uni5.png' %}" alt="">
+                        <img class='img-fluid concourimg' src="{% static 'img/images.png' %}" alt="">
+                        <img class='img-fluid concourimg' src="{% static 'img/ENSA.png' %}" alt="">
+                        <img class='img-fluid concourimg' src="{% static 'img/Ensias2.jpg' %}" alt="">
+
+                </div>
+                
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section bg-primary text-white p-5" >
+            <div class="container">
+                <h2 class="page-section-heading text-center text-uppercase text-white">About</h2>
+                <br>
+                    <div class="col text-center "><h3>Permet aux organisateurs de concours de gérer plus facilement leurs concours et de réduire les erreurs administratives tout en offrant une expérience utilisateur transparente aux participants.</h3></div>
+
+        
+            </div>
+        </section>
+      
+        <section class="page-section bg-white p-5">
+            <div class="container">
+         
+                <h2 class="page-section-heading text-center text-uppercase text-secondary pb-4">Contact</h2>
+     
+            
+              
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-xl-7">
+                        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                            
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                                <label for="name">Nom Complet</label>
+                                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                            </div>
+                        
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
+                                <label for="email">Address Email</label>
+                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                            </div>
+                    
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
+                                <label for="phone">Numero de Telephone</label>
+                                <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                            </div>
+                     
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
+                                <label for="message">Message</label>
+                                <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                            </div>
+                          
+                            <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer class="footer text-center bg-secondary text-white p-5">
+            <div class="container">
+                <div class="row">
+          
+                    <div class="col-lg-6 mb-5 mb-lg-0">
+                        <h4 class="text-uppercase mb-4">Location</h4>
+                        <p class="lead mb-0">
+                            Route d'Agadir, Essaouira Aljadida BP. 383
+                            <br />
+                            Ghazoua 44000
+                        </p>
+                    </div>
+              
+                    <div class="col-lg-5">
+                        <h4 class="text-uppercase mb-4">About Project</h4>
+                        <p class="lead mb-0">
+                            Project de fin d'etude created by Lyazid Lamribah,
+                            Ayoub Boudani
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <div class="copyright py-4 text-center bg-dark text-white">
+            <div class="container"><small>Copyright &copy; My Concour 2022</small></div>
+        </div>
+
+{% endblock %}

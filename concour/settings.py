@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_beat',
     'student',
+    'uni_admin',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +52,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CONTEXT_PROCESSORS =[
+    'django.contrib.messages.context_processors.messages',
 ]
 
 ROOT_URLCONF = 'concour.urls'
@@ -63,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
             ],
         },
     },
@@ -76,15 +85,23 @@ WSGI_APPLICATION = 'concour.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'xe',
-        'USER': 'system',
-        'PASSWORD': 'test',
-        'HOST': '',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':'concourmanagement',
+        'HOST':'127.0.0.1',
+        'PORT':'3306',
+        'USER':'root',
+        'PASSWORD':'root',
+
     }
 }
 
+
+# my.cnf
+# [client]
+# database = NAME
+# user = USER
+# password = PASSWORD
+# default-character-set = utf8
 
 
 # Password validation
@@ -111,7 +128,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'GMT'
 
 USE_I18N = True
 
@@ -123,7 +140,30 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+LOGIN_URL = 'login'
+
+LOGIN_REDIRECT_URL='home'
+
+AUTHENTICATION_BACKENDS = [    'django.contrib.auth.backends.ModelBackend',]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+from celery.schedules import crontab
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/'
+
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/'
+
+CELERY_TIMEZONE = 'GMT'
+
+CELERY_BEAT_SCHEDULE = {
+    'set_status': {
+        'task': 'student.tasks.set_status',
+        'schedule': crontab(hour=0, minute=0),
+        
+    },
+}

@@ -1,0 +1,97 @@
+
+{% extends "student/base.html" %}
+{% load static %}   
+{% block body %}
+<div class="page-container bg-body-secondary">
+  <div class="content-wrap">
+      <div class="row">
+          <div class="col-2">   
+            <div class="sidebar">
+              {% include "student/sidebar.html" %}
+            </div>         
+           
+          </div> 
+          
+          <div class="col-10 bg-light">
+            <div class="row d-flex justify-content-start bg-primary p-3">
+              <div class="col-md-3">
+                <form class='form pr-4' action="{% url 'studentpage' %}" method="GET">
+                  <div class="input-group">
+                    <input type="text" class="form-control mr-2" placeholder="Search anything..." name="q">
+                    <div class="input-group-prepend">
+                      <button class="btn btn-primary " type="submit">Search</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-center flex-wrap bg-light pt-2 overflow-auto " style="max-height: 90vh;">
+              {% for concours_obj in list_concours %}
+                <div class="card mb-4 shadow p-3 mb-5 bg-body-tertiary rounded" style="width: 18rem;">
+                  <img src="{% static 'img/' %}{{ concours_obj.university.id|lower|slugify }}.png" class="card-img-top" style="height: 200px;" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ concours_obj.name }}</h5>
+                    <p class="card-text">{{ concours_obj.description }}</p>
+                    <p class="card-text">Start date: {{ concours_obj.start_date }}</p>
+                    <p class="card-text">End date: {{ concours_obj.end_date }}</p>
+                    <p><form action="{% url 'inscription' concour.id %}" method="POST">
+                      {% csrf_token %}
+                      <input class="btn btn-primary btn-lg text-center" type="submit" value="Inscrire" />
+                    </form>
+                    </p>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>    
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+          
+           
+       
+
+
+
+
+
+  
+
+<!-- <div class="card-body p-4 p-md-5 " style="max-width: 90vw;margin: auto; margin-top: 60px;">
+<h3 class="mb-4 pb-2 pb-md-0 mb-md-5 ml-4 fw-bold text-center">Concours disponible</h3>
+    <hr class="dashed ">
+    <table class="table table-dashed table-dark table-hover">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">university</th>
+            <th scope="col">location</th>
+            <th scope="col">start date</th>
+            <th scope="col">end date</th>
+            <th scope="col">inscription</th>
+          </tr>
+        </thead>
+        <tbody class="tbody-light">
+            {% for concour in list_concours %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{concour.university.name}}</td>
+            <td>{{concour.university.location}}</td>
+            <td>{{concour.start_date}}</td>
+            <td>{{concour.end_date}}</td>
+            <td><button>Inscrire</button></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div> -->
+{% endblock %}
