@@ -70,4 +70,10 @@ class LoginForm(forms.Form):
 class SearchForm(forms.Form):
     query = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control form-input', 'placeholder': 'Search anything...'}))    
 
-    
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Etudiant
+        fields = ['nom', 'prenom', 'cne', 'email', 'DateNaissance', 'Numerotelephone', 'profile_pic']
+
+    profile_pic = forms.ImageField(label='Profile Picture', required=False)
