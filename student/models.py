@@ -4,43 +4,54 @@ from django.contrib.auth.models import User
 
 
 class Etudiant(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True,related_name='etudiant')
-    cne = models.CharField(max_length=12,primary_key=True,unique=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='etudiant')
+    cne = models.CharField(max_length=12, primary_key=True, unique=True)
     nom = models.CharField(max_length=12)
     prenom = models.CharField(max_length=12)
-    email = models.EmailField(max_length=30,unique=True)
-    password=models.CharField(max_length=100,blank=True, null=True)
-    confirmpassword=models.CharField(max_length=50,null=True)
+    email = models.EmailField(max_length=30, unique=True)
+    password = models.CharField(max_length=100, blank=True, null=True)
+    confirmpassword = models.CharField(max_length=50, null=True)
     DateNaissance = models.DateField()
     Numerotelephone = models.IntegerField()
+    profile_pic = models.ImageField(upload_to='student/img', default='student/img/user.png')
 
     def __str__(self):
-        return self.cne
+        return self.prenom
+
     class Meta:
         db_table = 'Student'
-    
+
 
 class university(models.Model):
     id = models.CharField(primary_key=True,max_length=30)
     name = models.CharField(max_length=200) 
     location = models.CharField(max_length=30)
-    def _str_(self):
+
+    def __str__(self):
         return self.name
+    
+
+class etablissement():
+    university = models.ForeignKey(university, on_delete=models.CASCADE,null=True )
+    name = models.CharField(max_length=200) 
+    description = models.CharField(max_length=300)
+
+
 
 
 class concours(models.Model):
-    name = models.CharField(max_length=200)
-    university = models.ForeignKey(university, on_delete=models.CASCADE,null=True )
-    description = models.CharField(max_length=300)
+    #name = models.CharField(max_length=200)
+    etablissement = models.ForeignKey(etablissement, on_delete=models.CASCADE,null=True )
+    #description = models.CharField(max_length=300)
     start_date = models.DateField()
     end_date = models.DateField()
-    doc_necessaire = models.CharField(max_length=300)
+    #doc_necessaire = models.CharField(max_length=300)
     filliere = models.CharField(max_length=300)
     seuille =models.IntegerField()
-    n_place=models.IntegerField()
+    #n_place=models.IntegerField()
 
 
-    def str(self):
+    def __str__(self):
         return self.name 
     
 
@@ -48,7 +59,7 @@ class attente(models.Model):
     etudiant = models.ForeignKey(Etudiant, on_delete=models.CASCADE,null=True)
     concour = models.ForeignKey(concours, on_delete=models.CASCADE,null=True)
     classement = models.IntegerField(null=True,blank=True)
-    note = models.IntegerField()
+    note = etudiant.note
     date_creation = models.DateTimeField(auto_now_add=True)
     
     STATUS_CHOICES = [

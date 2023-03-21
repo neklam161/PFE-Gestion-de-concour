@@ -1,8 +1,7 @@
 body{
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    background: rgb(2,0,36);
-    background: linear-gradient(21deg, rgba(2,0,36,1) 0%, rgba(26,188,144,1) 50%, rgba(0,212,255,1) 100%) o !important; 
+    background: radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%) !important; 
 }
 .h2{
     font-weight: 900 !important;
@@ -17,4 +16,16 @@ img{
 .nav-link:hover{
     color: var(--bs-nav-pills-link-active-color) !important;
     background-color: var(--bs-nav-pills-link-active-bg) !important;
+}
+.background{
+  background-image: url('/static/img/vecteezy_graduation-background-2_dy0421_generated.jpg') !important;
+  background-size:90%;
+  background-repeat: no-repeat;
+
+} 
+.profile{
+    width: 150px; 
+    height: 150px; 
+    object-fit: cover; 
+    object-position: center;
 }

@@ -23,7 +23,6 @@ def concour_admin(request):
     return render(request,'uni_admin/concour.html',{"list_concours" : list_concours})
 
 
-
 def add_con(request):
     if request.method == 'POST':
         form = add_Concour(request.POST)
@@ -32,14 +31,15 @@ def add_con(request):
             new_name = form.cleaned_data["name"]
             #new_university_name = form.cleaned_data["university"]
             new_description = form.cleaned_data["description" ]
-            new_filiere = form.cleaned_data["filiere"]
+            new_filiere = form.cleaned_data["filliere"]
             new_strat_date = form.cleaned_data["start_date" ]
             new_end_date= form.cleaned_data["end_date"]
             new_documets= form.cleaned_data["doc_necessaire"]
             #new_location = form.cleaned_data["location"]
             new_seuille = form.cleaned_data["seuille"]
             new_place = form.cleaned_data["n_place"]
-            new_admin = University_admin.objects.filter(user = request.user)
+            
+            new_admin = University_admin.objects.get(user = request.user)
 
             new_university = new_admin.university
 
@@ -62,6 +62,4 @@ def add_con(request):
             return redirect('concour')
     else:
         form = add_Concour()
-    return render(request, 'uni_admin/add_concour.html',{
-        'form': form
-    })
+    return render(request, 'uni_admin/add_concour.html',{'form':form})
