@@ -4,29 +4,30 @@ from django.contrib.auth.models import User
 
 
 class Etudiant(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True,related_name='etudiant')
-    cne = models.CharField(max_length=12,primary_key=True,unique=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='etudiant')
+    cne = models.CharField(max_length=12, primary_key=True, unique=True)
     nom = models.CharField(max_length=12)
     prenom = models.CharField(max_length=12)
-    email = models.EmailField(max_length=30,unique=True)
-    password=models.CharField(max_length=100,blank=True, null=True)
-    confirmpassword=models.CharField(max_length=50,null=True)
+    email = models.EmailField(max_length=30, unique=True)
+    password = models.CharField(max_length=100, blank=True, null=True)
+    confirmpassword = models.CharField(max_length=50, null=True)
     DateNaissance = models.DateField()
     Numerotelephone = models.IntegerField()
-    note = models.IntegerField(null  = True)
-    profile_pic = models.ImageField(upload_to='student/img',)
+    profile_pic = models.ImageField(upload_to='student/img', default='student/img/user.png')
+
     def __str__(self):
-        return self.cne
+        return self.prenom
+
     class Meta:
         db_table = 'Student'
-    
+
 
 class university(models.Model):
     id = models.CharField(primary_key=True,max_length=30)
     name = models.CharField(max_length=200) 
     location = models.CharField(max_length=30)
 
-    def _str_(self):
+    def __str__(self):
         return self.name
     
 
@@ -50,7 +51,7 @@ class concours(models.Model):
     #n_place=models.IntegerField()
 
 
-    def str(self):
+    def __str__(self):
         return self.name 
     
 

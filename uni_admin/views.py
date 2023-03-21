@@ -23,7 +23,6 @@ def concour_admin(request):
     return render(request,'uni_admin/concour.html',{"list_concours" : list_concours})
 
 
-
 def add_con(request):
     if request.method == 'POST':
         form = add_Concour(request.POST)
@@ -63,6 +62,4 @@ def add_con(request):
             return redirect('concour')
     else:
         form = add_Concour()
-    return render(request, 'uni_admin/add_concour.html',{
-        'form': form
-    })
+    return render(request, 'uni_admin/add_concour.html',{'form':form})

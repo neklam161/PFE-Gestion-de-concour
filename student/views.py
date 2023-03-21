@@ -8,8 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
-from django.urls import reverse
+from uni_admin.models import University_admin
 
 @csrf_protect
 def login_view(request):
@@ -22,12 +21,16 @@ def login_view(request):
             password = form.cleaned_data["password"]
             
 
-            etudiant = authenticate(request, username=username, password=password)
-            
-            if etudiant is not None:
-                login(request, etudiant)
-                print("User '{}' logged in successfully.".format(etudiant.username))
-                return redirect("studentpage")
+            user = authenticate(request, username=username, password=password)
+             
+            if user is not None:
+                login(request, user)
+                print("User '{}' logged in successfully.".format(user.username))
+
+                if hasattr(user, 'etudiant'):
+                    return redirect("studentpage")
+                elif hasattr(user, 'university_admin'):
+                    return redirect("concour")
             
             else:
                 return render(request, 'student/login.html', {'form':LoginForm(),'error': 'Invalid email or password.'})
@@ -81,8 +84,7 @@ def register(request):
             return redirect('login')
     else:
         form = EtudiantForm()
-    return render(request, 'student/register.html',{'form': form
-        })
+    return render(request, 'student/register.html',{'form': form})
 
 
 def homepage(request):
@@ -97,6 +99,17 @@ def concour(request):
         list_concours = list_concours.filter(name__icontains=search_term)
     return render(request,'student/concour.html',{"list_concours" : list_concours,"etudiant":etudiant})
 
+@login_required
+def profile(request):
+    etudiant = Etudiant.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=etudiant)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your profile has been updated successfully!')
+    else:
+        form = ProfileForm(instance=etudiant)
+    return render(request, 'student/profile.html', {'etudiant': etudiant, 'form': form})
 
 def inscrire(request,concour_id):
 

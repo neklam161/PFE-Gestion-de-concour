@@ -24,7 +24,11 @@
                   </div>
                 </form>
               </div>
+              <div class="col-md-9 text-end ">
+                  <h2 class="text-white px-3">Welcome, {{ request.user.username }}!</h2>
+              </div>
             </div>
+         
 
             <div class="d-flex justify-content-center flex-wrap bg-light pt-2 overflow-auto " style="max-height: 90vh;">
               {% for concours_obj in list_concours %}
@@ -66,32 +70,4 @@
 
   
 
-<!-- <div class="card-body p-4 p-md-5 " style="max-width: 90vw;margin: auto; margin-top: 60px;">
-<h3 class="mb-4 pb-2 pb-md-0 mb-md-5 ml-4 fw-bold text-center">Concours disponible</h3>
-    <hr class="dashed ">
-    <table class="table table-dashed table-dark table-hover">
-        <thead class="thead-light">
-          <tr>
-            <th scope="col"></th>
-            <th scope="col">university</th>
-            <th scope="col">location</th>
-            <th scope="col">start date</th>
-            <th scope="col">end date</th>
-            <th scope="col">inscription</th>
-          </tr>
-        </thead>
-        <tbody class="tbody-light">
-            {% for concour in list_concours %}
-          <tr>
-            <th scope="row">{{ forloop.counter }}</th>
-            <td>{{concour.university.name}}</td>
-            <td>{{concour.university.location}}</td>
-            <td>{{concour.start_date}}</td>
-            <td>{{concour.end_date}}</td>
-            <td><button>Inscrire</button></td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div> -->
 {% endblock %}

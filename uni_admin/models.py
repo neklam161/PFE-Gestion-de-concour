@@ -1,11 +1,10 @@
 from django.db import models
 from student.models import concours,university
-from datetime import datetime, date
 
 from django.contrib.auth.models import User
 # Create your models here.
 class University_admin(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='university_admin', null=True)
     cin = models.CharField(max_length=12,primary_key=True,unique=True)
     university = models.ForeignKey(university,on_delete=models.CASCADE,null=False)
     nom = models.CharField(max_length=12)
