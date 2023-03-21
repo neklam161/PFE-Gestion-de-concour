@@ -13,7 +13,8 @@ class Etudiant(models.Model):
     confirmpassword=models.CharField(max_length=50,null=True)
     DateNaissance = models.DateField()
     Numerotelephone = models.IntegerField()
-
+    note = models.IntegerField(null  = True)
+    profile_pic = models.ImageField(upload_to='student/img',)
     def __str__(self):
         return self.cne
     class Meta:
@@ -24,20 +25,29 @@ class university(models.Model):
     id = models.CharField(primary_key=True,max_length=30)
     name = models.CharField(max_length=200) 
     location = models.CharField(max_length=30)
+
     def _str_(self):
         return self.name
+    
+
+class etablissement():
+    university = models.ForeignKey(university, on_delete=models.CASCADE,null=True )
+    name = models.CharField(max_length=200) 
+    description = models.CharField(max_length=300)
+
+
 
 
 class concours(models.Model):
-    name = models.CharField(max_length=200)
-    university = models.ForeignKey(university, on_delete=models.CASCADE,null=True )
-    description = models.CharField(max_length=300)
+    #name = models.CharField(max_length=200)
+    etablissement = models.ForeignKey(etablissement, on_delete=models.CASCADE,null=True )
+    #description = models.CharField(max_length=300)
     start_date = models.DateField()
     end_date = models.DateField()
-    doc_necessaire = models.CharField(max_length=300)
+    #doc_necessaire = models.CharField(max_length=300)
     filliere = models.CharField(max_length=300)
     seuille =models.IntegerField()
-    n_place=models.IntegerField()
+    #n_place=models.IntegerField()
 
 
     def str(self):
@@ -48,7 +58,7 @@ class attente(models.Model):
     etudiant = models.ForeignKey(Etudiant, on_delete=models.CASCADE,null=True)
     concour = models.ForeignKey(concours, on_delete=models.CASCADE,null=True)
     classement = models.IntegerField(null=True,blank=True)
-    note = models.IntegerField()
+    note = etudiant.note
     date_creation = models.DateTimeField(auto_now_add=True)
     
     STATUS_CHOICES = [

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
-from django.shortcuts import redirect, render
+
 from django.contrib import messages
 from .forms import *
 from .models import *
@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.urls import reverse
+
 @csrf_protect
 def login_view(request):
 
@@ -71,7 +72,7 @@ def register(request):
                prenom = new_prenom,
                email = new_email,
                password = hashed_password,
-               confirmpassword = new_confpassword,
+               #confirmpassword = new_confpassword,
                DateNaissance = new_DateNaissance,
                Numerotelephone = new_Numerotelephone
             )

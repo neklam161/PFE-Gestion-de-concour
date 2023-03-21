@@ -17,6 +17,6 @@ class University_admin(models.Model):
     Numerotelephone = models.IntegerField()
 
     def __str__(self):
-        return self.cne
+        return self.cin
     class Meta:
         db_table = 'university_admin'

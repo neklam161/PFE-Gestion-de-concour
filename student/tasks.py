@@ -11,7 +11,7 @@ def set_status():
         for concour in list_concours:
             if concour.end_date > timezone.now().date() :
                 concour_participants = attente.objects.filter(concour = concour)
-                admis_places = concour_participants.order_by('classement')[:concour.n_place]
+                admis_places = concour_participants.order_by('classement') 
                 for etudiant in admis_places:
                     etudiant.status = "A"
                 refus_places = concour_participants.order_by('classement')[concour.n_place:]
