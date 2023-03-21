@@ -21,12 +21,7 @@
                                {{ form.name }}
                              
                             
-                            
-                               <label for="{{ form.university.id_for_label }}" class=" mr-4">nom d'université  *</label>
-                               {{ form.university.errors }}
-                               {{ form.university }}
-                            
-                            
+                                                      
                             
                                <label for="{{ form.description.id_for_label }}" class=" mr-4">Description *</label>
                                {{ form.description.errors }}
@@ -59,12 +54,33 @@
                          <div class="row mb-4">
                             
                             
-                             <label for="{{ form.location.id_for_label }}" class=" mr-4">Location *</label>
-                              {{ form.location.errors }}
-                              {{ form.location }}
+                             <label for="{{ form.filliere.id_for_label }}" class=" mr-4">Filliere *</label>
+                              {{ form.filliere.errors }}
+                              {{ form.filliere }}
                                                 
                            
                           </div>
+                          <div class="row mb-4">
+                            
+                            
+                           <label for="{{ form.seuille.id_for_label }}" class=" mr-4">seuille *</label>
+                            {{ form.seuille.errors }}
+                            {{ form.seuille }}
+                                              
+                         
+                        </div>
+                        <div class="row mb-4">
+                            
+                            
+                           <label for="{{ form.n_place.id_for_label }}" class=" mr-4">N° Place *</label>
+                            {{ form.n_place.errors }}
+                            {{ form.n_place }}
+                                              
+                         
+                        </div>
+                        
+
+                          
                       </div>
                      
                 </div>

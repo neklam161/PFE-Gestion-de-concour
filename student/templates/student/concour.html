@@ -39,7 +39,11 @@
                     <p class="card-text">{{ concours_obj.description }}</p>
                     <p class="card-text">Start date: {{ concours_obj.start_date }}</p>
                     <p class="card-text">End date: {{ concours_obj.end_date }}</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <p><form action="{% url 'inscription' concour.id %}" method="POST">
+                      {% csrf_token %}
+                      <input class="btn btn-primary btn-lg text-center" type="submit" value="Inscrire" />
+                    </form>
+                    </p>
                   </div>
                 </div>
               {% endfor %}

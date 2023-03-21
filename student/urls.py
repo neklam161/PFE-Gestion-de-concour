@@ -8,7 +8,7 @@ urlpatterns = [
     path('',homepage,name='home'),
     path('logout/',logout_view,name="logout"),
     path('concour/',concour,name="studentpage"),
-    path('concour/profile',profile,name='profile')
+     path('inscription/<int:concour_id>/', inscrire, name='inscription'),
 ]
 
 

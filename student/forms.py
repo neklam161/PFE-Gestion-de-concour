@@ -77,3 +77,10 @@ class ProfileForm(forms.ModelForm):
         fields = ['nom', 'prenom', 'cne', 'email', 'DateNaissance', 'Numerotelephone', 'profile_pic']
 
     profile_pic = forms.ImageField(label='Profile Picture', required=False)
+class inscri_concour(forms.Form):
+    cne = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'G*********'}))
+    nom = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nom'}))
+    prenom = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Prenom'}))
+    email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'example@gmail.com'}))
+    note = forms.IntegerField()
+
