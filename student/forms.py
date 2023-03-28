@@ -2,7 +2,7 @@ from django import forms
 from .models import Etudiant
 from django.core.exceptions import ValidationError
 from django.contrib.auth.hashers import make_password
-
+from django.contrib.auth import authenticate
 
 
 class DateInput(forms.DateInput):
@@ -15,6 +15,14 @@ class EtudiantForm(forms.ModelForm):
     class Meta:
         model = Etudiant
         fields = ["cne" ,"nom" , "prenom" ,"email" ,"password","confirmpassword", "DateNaissance","Numerotelephone"]
+    
+class EtudiantFormStep1(forms.ModelForm):
+    password=forms.CharField(widget=forms.PasswordInput())
+    confirmpassword=forms.CharField(widget=forms.PasswordInput())
+    DateNaissance=forms.DateField(widget=DateInput)
+    class Meta:
+        model = Etudiant
+        fields = ["cne",'nom', 'prenom', 'email',"password","confirmpassword",'DateNaissance', 'lieu_naissance',"Numerotelephone"]
     def clean(self):
         cleaned_data = super().clean()
         vpassword = self.cleaned_data["password"]
@@ -25,7 +33,21 @@ class EtudiantForm(forms.ModelForm):
             raise forms.ValidationError(
             "password and confirm_password does not match"
             )
- 
+
+class EtudiantFormStep2(forms.ModelForm):
+    class Meta:
+        model = Etudiant
+        fields = ['pays_naissance', 'nationalite', 'sexe', 'situation_familiale', 'adresse']
+
+class EtudiantFormStep3(forms.ModelForm):
+    class Meta:
+        model = Etudiant
+        fields = ['serie_bac', 'mention_bac', 'province_bac','profile_pic']
+
+class EtudiantFormStep4(forms.ModelForm):
+    class Meta:
+        model = Etudiant
+        fields = ['diplome', 'Etablissement']
 
     def check_email_exists(email):
         try:
@@ -65,6 +87,15 @@ class EtudiantForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username=forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'example@gmail.com'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
+    # def clean(self):
+    #     cleaned_data = super().clean()
+    #     username = cleaned_data.get('username')
+    #     password = cleaned_data.get('password')
+    #     if username and password:
+    #         user = authenticate(email=username, password=password)
+    #         if user is None:
+    #             raise forms.ValidationError('Invalid email or password')
+    #     return cleaned_data
     
     
 class SearchForm(forms.Form):

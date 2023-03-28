@@ -1,10 +1,9 @@
 from django.db import models
-from student.models import concours,university
-
-from django.contrib.auth.models import User
+from student.models import university
+from django.conf import settings
 # Create your models here.
 class University_admin(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='university_admin', null=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name='university_admin', null=True)
     cin = models.CharField(max_length=12,primary_key=True,unique=True)
     university = models.ForeignKey(university,on_delete=models.CASCADE,null=False)
     nom = models.CharField(max_length=12)

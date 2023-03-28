@@ -16,9 +16,17 @@ background: linear-gradient(21deg, rgba(2,0,36,1) 0%, rgba(26,188,144,1) 50%, rg
           <div class="col-12 col-md-8 col-lg-6">
             <div class="card bg-white ">
               <div class="card-body p-5">
-                
+                {% if form.errors %}
+                <div class="alert alert-danger">
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                        <p>{{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+                {% endif %}
                 <form class="mb-3 mt-md-4" method="post" action="{% url 'login' %}">
-          
+                  
                   {% if messages %}
                   <ul class="messages">
                       {% for message in messages %}
